@@ -1,0 +1,72 @@
+<!--
+  Generated template for the EditProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>editProfile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <p>Hello - {{username}}</p> 
+    <ion-list>  
+        <ion-item>
+            <ion-label>
+              first name
+            </ion-label>
+            <ion-input name="first_name" [(ngModel)]="profile.first_name" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+              last name
+            </ion-label>
+            <ion-input name="last_name" [(ngModel)]="profile.last_name" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+              E-mail
+            </ion-label>
+            <ion-input name="email" [(ngModel)]="profile.email" type="email"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label>
+              Phone
+            </ion-label>
+            <ion-input name="phone" [(ngModel)]="profile.phone" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+              Address
+            </ion-label>
+            <ion-input name="address" [(ngModel)]="profile.address" type="text"></ion-input>
+        </ion-item>
+        <ion-list>
+            <ion-item>
+              <ion-label>Select Room</ion-label>
+              <ion-select [(ngModel)]="profile.room">
+                <ion-option value="ห้องที่ 1">ห้องที่ 1</ion-option>
+                <ion-option value="ห้องที่ 2">ห้องที่ 2</ion-option>
+                <ion-option value="ห้องที่ 3">ห้องที่ 3</ion-option>
+                <ion-option value="ห้องที่ 4">ห้องที่ 4</ion-option>
+                <ion-option value="ห้องที่ 5">ห้องที่ 5</ion-option>
+                <ion-option value="ห้องที่ 6">ห้องที่ 6</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+
+            <button   ion-button  (click) ="createProfile()">Save</button>
+            <button   ion-button  (click) ="EditProfile()">Edit</button>
+   </ion-list>
+  
+    <ion-list>
+        <button ion-button  (click) ="logout()">Logout</button>
+     </ion-list>
+
+</ion-content>
