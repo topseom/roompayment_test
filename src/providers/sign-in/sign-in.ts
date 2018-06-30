@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {IonicStorageModule} from '@ionic/storage';
-import { Storage } from '@ionic/storage/dist/storage';
+import  {Storage } from '@ionic/storage';
 
 /*
   Generated class for the SignInProvider provider.
@@ -17,7 +16,7 @@ export class SignInProvider {
   }
   setUser(data){
     // callback when save wait clear to continious to other function
-    return new Promise((resolve,reject)=>{
+    return new Promise<any>((resolve,reject)=>{
       this.storage.set("users",JSON.stringify(data)).then(callback=>{
 
         resolve(true);
@@ -27,10 +26,20 @@ export class SignInProvider {
    // this.storage.set("","");
   }
   getUser(){ // get
-    return new Promise((resolve,reject)=>{
+    return new Promise<any>((resolve,reject)=>{
       this.storage.get("users").then(data=>{
 
         resolve(JSON.parse(data));
+      });
+    });
+  }
+
+  removeUser(){
+    return new Promise<any>((resolve,reject)=>{
+      this.storage.remove("users").then(success=>{
+        resolve(true);
+      }).catch(err=>{
+        reject(err);
       });
     });
   }

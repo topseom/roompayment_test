@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,AlertController } from 'ionic-angular';
+import { NavController, NavParams,AlertController,LoadingController } from 'ionic-angular';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase} from 'angularfire2/database'; 
 import {SignInProvider} from '../../providers/sign-in/sign-in';
@@ -23,22 +23,22 @@ export class SignInPage {
     password:any;
     users= [];
     userId :any;
-    constructor(public _data:SignInProvider,public afdb:AngularFireDatabase,public auth:AngularFireAuth,public navCtrl: NavController, public navParams: NavParams,public alert:AlertController) {
+    constructor(public loadingCtrl:LoadingController,public _data:SignInProvider,public afdb:AngularFireDatabase,public auth:AngularFireAuth,public navCtrl: NavController, public navParams: NavParams,public alert:AlertController) {
       
       /*this.auth.authState.subscribe(users =>{
         if(users) this.userId = users.uid
       }) */
       
-      this._data.getUser().then((users:any)=>{
+      // ****  move this method to app.component.ts
+      /*this._data.getUser().then((users:any)=>{
         if(users){
           console.log(users);
-            if(users.id){      
+          if(users.uid){      
               this.navCtrl.setRoot(EditProfilePage);
-           }
+          }
           this.users = users;
         } 
-        
-      });
+      });*/
   
     }
   
@@ -47,22 +47,26 @@ export class SignInPage {
     }
      
     signIn(){
-      
+      let loading = this.loadingCtrl.create();
+      loading.present();
       if(this.email && this.password){
         let text_email = this.email;
         let text_pass = this.password;
         this.auth.auth.signInWithEmailAndPassword(text_email,text_pass)
         .then(userSuccess=>{ 
-          this._data.setUser(userSuccess).then(callback=>{
-          this.email = text_email;
-          this.password =  text_pass;
-        });
-         
-        //this.navCtrl.setRoot(EditProfilePage);
-        this.navCtrl.setRoot(EditProfilePage,{username:text_email,u_pass:text_pass});
-        
+          loading.dismiss().then(()=>{
+            this._data.setUser(userSuccess).then(callback=>{
+              this.email = text_email;
+              this.password =  text_pass;
+              this.navCtrl.setRoot(EditProfilePage,{id:userSuccess.uid});
+            });
+          });
+          
        }).catch(error=>{
+        loading.dismiss().then(()=>{
           alert(error.message);
+        });
+          
        });
    
      }
