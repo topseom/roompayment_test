@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,LoadingController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
-import { Firebase } from '@ionic-native/firebase';
+//import { Observable } from 'rxjs/Observable';
+//import { Firebase } from '@ionic-native/firebase';
 import { AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {SignInProvider} from '../../providers/sign-in/sign-in';
 import{ SignInPage} from '../../pages/sign-in/sign-in';
 import { Storage } from '@ionic/storage';
 import {ListRoomRatePage} from '../../pages/list-room-rate/list-room-rate';
-import firebase from "firebase";
+//import firebase from "firebase";
 
 /**
  * Generated class for the EditProfilePage page.
@@ -53,6 +53,7 @@ export class EditProfilePage {
   loadProfile(){
     let loading = this.loadingCtrl.create();
     loading.present();
+    this.username = this.navParams.get('username');
     this.user_id = this.navParams.get('id');
     this.afdb.object(`profile/${this.user_id}`).valueChanges()
     .subscribe(data=>{

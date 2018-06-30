@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-    <p>Hello - {{username}}</p> 
+    <p>Hello - <span *ngIf="profile.email"></span>{{username}}</p> 
     <ion-list>  
         <ion-item>
             <ion-label>

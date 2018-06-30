@@ -4,7 +4,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase} from 'angularfire2/database'; 
 import {SignInProvider} from '../../providers/sign-in/sign-in';
 import { SignUpPage } from '../sign-up/sign-up';
-import { ListRoomRatePage } from '../list-room-rate/list-room-rate';
+//import { ListRoomRatePage } from '../list-room-rate/list-room-rate';
 import {EditProfilePage} from '../edit-profile/edit-profile';
 
 /**
@@ -58,7 +58,7 @@ export class SignInPage {
             this._data.setUser(userSuccess).then(callback=>{
               this.email = text_email;
               this.password =  text_pass;
-              this.navCtrl.setRoot(EditProfilePage,{id:userSuccess.uid});
+              this.navCtrl.setRoot(EditProfilePage,{id:userSuccess.uid,username:userSuccess.email});
             });
           });
           

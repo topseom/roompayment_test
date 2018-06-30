@@ -25,7 +25,7 @@ export class MyApp {
       _user.getUser().then(user=>{
         if(user){
            // if already user login
-          this.nav.setRoot(EditProfilePage,{id:user.uid});
+          this.nav.setRoot(EditProfilePage,{id:user.uid,username:user.email});
         }else{
            // if not authen
           this.rootPage = SignInPage;
